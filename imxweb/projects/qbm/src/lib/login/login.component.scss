@@ -11,7 +11,7 @@ $inputWidth: calc(40vw + 2px);
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: $iris-blue;
+  background-color: $CCC_orange;
   color: $white;
   align-items: center;
 }
@@ -83,6 +83,12 @@ $inputWidth: calc(40vw + 2px);
 
   button {
     margin: 0 10px;
+    color: $CCC_orange;
+  }
+  button:hover {
+    background-color: $CCC_orange;
+    color: #fff;
+    border-color: #fff;
   }
 }
 
