@@ -31,8 +31,6 @@ $inputWidth: calc(40vw + 2px);
   h1 {
     text-align: center;
   }
-
-
 }
 
 .imx-loginMask {
@@ -84,11 +82,11 @@ $inputWidth: calc(40vw + 2px);
   button {
     margin: 0 10px;
     color: $CCC_orange;
-  }
-  button:hover {
-    background-color: $CCC_orange;
-    color: #fff;
-    border-color: #fff;
+    &:hover {
+      background-color: $CCC_orange;
+      color: #fff;
+      border: solid #fff;
+    }
   }
 }
 

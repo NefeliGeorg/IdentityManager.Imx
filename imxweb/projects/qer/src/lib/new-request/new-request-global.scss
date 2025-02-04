@@ -1,3 +1,4 @@
+@import "variables.scss";
 @import '@elemental-ui/core/src/styles/_palette.scss';
 
 // $header-type: Values: body, title, label, emphasize, description
@@ -61,6 +62,10 @@
     .image-category {
       width: 24px;
       height: auto;
+    }
+
+    .image-category.ng-star-inserted {
+      color: $CCC_orange;
     }
 
     .mat-chip {
