@@ -95,7 +95,7 @@ export class EditReportModule {
         const items: MenuItem[] = [];
 
         if (preProps.includes('REPORT_SUBSCRIPTION')) {
-          items.push(
+          /*.push(
             {
               id: 'RPS_Reports',
               navigationCommands: {
@@ -104,7 +104,7 @@ export class EditReportModule {
               title: '#LDS#Menu Entry Reports',
               sorting: '60-70',
             },
-          );
+          );*/
         }
 
         if (items.length === 0) {

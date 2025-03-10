@@ -53,6 +53,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { QerApiService } from '../qer-api-client.service';
 import { ProfileSettings } from 'imx-api-qer';
 import { QerPermissionsService } from '../admin/qer-permissions.service';
+import { ReadWriteEntityColumn } from 'imx-qbm-dbts/dist/ReadWriteEntityColumn';
 
 @Component({
   templateUrl: './profile.component.html',
@@ -242,15 +243,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       this.selectedIdentity = (await this.person.getMasterdataInteractive(userUid)).Data[0].GetEntity();
 
-      this.cdrList = (this.columns ?? []).map(columnName => {
+      this.cdrList = (this.columns ?? []).filter(columnName => columnName != 'Gender').map(columnName => {
         const column = this.selectedIdentity.GetColumn(columnName);
         return {
           column,
-          isReadOnly: () => !column.GetMetadata().CanEdit(),
+          isReadOnly: () => column.GetMetadata().CanEdit() && column.ColumnName != 'MiddleName',
           hint: this.hints[columnName]
         };
       });
-
+      
       this.mailInfo = await this.mailSvc.getMailsThatCanBeUnsubscribed(userUid);
       this.hasMailSubscriptions = this.mailInfo.length > 0;
       const mailSubscriptionUid = this.activatedRoute.snapshot.queryParams?.uid_dialogrichmail;

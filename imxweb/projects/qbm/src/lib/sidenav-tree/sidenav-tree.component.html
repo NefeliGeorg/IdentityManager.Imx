@@ -112,7 +112,7 @@
             <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="20">
               <div class="mat-tree-node" [ngClass]="{ 'mat-tree-node--selected': isSelected(node) }">
                 <button mat-button matTreeNodeToggle class="mat-icon-button" [attr.aria-label]="'#LDS#Expand' | translate" data-imx-identifier="sidenav-tree-parent-toggle">
-                  <eui-icon size="s" [icon]="treeControl.isExpanded(node) ? 'chevrondown' : 'chevronright'"></eui-icon>
+                  <eui-icon size="s" [icon]="treeControl.isExpanded(node) ? 'cart' : 'chevronright'"></eui-icon>
                 </button>
                 <button mat-button color="primary" class="tree-item-button" data-imx-identifier="sidenav-tree-parent-select" (click)="selectNode(node)">
                   <ng-container *ngTemplateOutlet="treeNodeTemplate; context: { $implicit: node, selected: isSelected(node) }"></ng-container>

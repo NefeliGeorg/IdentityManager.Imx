@@ -1,0 +1,20 @@
+<h2 class="mat-headline">
+<span>{{ 'Employees' }}</span>
+</h2>
+
+<mat-form-field appearance="outline">
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+</mat-form-field>
+
+<mat-paginator [pageSizeOptions]="[2, 6, 10]" showFirstLastButtons></mat-paginator>
+<table mat-table [dataSource]="datasource">
+
+  <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+    <mat-header-cell *matHeaderCellDef> {{ col }} </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="openSidesheet(element)"> {{element[col]}} </mat-cell>
+  </ng-container>
+  
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</table>

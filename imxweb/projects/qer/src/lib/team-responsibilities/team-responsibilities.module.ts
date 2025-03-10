@@ -84,7 +84,7 @@ export class TeamResponsibilitiesModule {
   }
 
   private async setupMenu(): Promise<void> {
-    this.menuService.addMenuFactories(
+    /*this.menuService.addMenuFactories(
       (preProps: string[], groups: string[]) => {
 
         const items: MenuItem[] = [];
@@ -102,6 +102,6 @@ export class TeamResponsibilitiesModule {
           };
         }
       },
-    );
+    );*/
   }
 }

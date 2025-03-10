@@ -24,6 +24,8 @@
       "aob/*": ["dist/aob/*"],
       "tsb": ["dist/tsb"],
       "tsb/*": ["dist/tsb/*"],
+      "empl": ["dist/empl"],
+      "empl/*": ["dist/empl/*"],
       "att": ["dist/att"],
       "att/*": ["dist/att/*"],
       "rps": ["dist/rps"],

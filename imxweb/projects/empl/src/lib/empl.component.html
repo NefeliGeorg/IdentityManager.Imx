@@ -1,0 +1,6 @@
+<imx-badge-tile *ngIf="this.service.numberofEmployees > 0"
+    [caption]="'My Employees'"
+    [value]="this.service.numberofEmployees"
+    (actionClick)="GoToMyEmployees()"
+>
+</imx-badge-tile>

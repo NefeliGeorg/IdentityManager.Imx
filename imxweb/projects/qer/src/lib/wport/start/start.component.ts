@@ -31,9 +31,24 @@ import { UserConfig, ProjectConfig, QerProjectConfig } from 'imx-api-qer';
 import { UserModelService } from '../../user/user-model.service';
 import { PendingItemsType } from '../../user/pending-items-type.interface';
 import { ProjectConfigurationService } from '../../project-configuration/project-configuration.service';
-import { imx_SessionService, SystemInfoService } from 'qbm';
+import { AppConfigService, imx_SessionService, SystemInfoService } from 'qbm';
 import { SystemInfo } from 'imx-api-qbm';
 import { DashboardService } from './dashboard.service';
+import { MethodDescriptor, TimeZoneInfo } from 'imx-qbm-dbts';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { EuiAlertBannerService } from '@elemental-ui/core';
+
+interface fullName {
+  FirstName: string;
+  LastName: string;
+}
+
+interface ps2 {
+  DepartmentMembership: boolean;
+  ConfParameterIsEnabled: boolean;
+  BannerMessage: string;
+}
 
 @Component({
   templateUrl: './start.component.html',
@@ -47,6 +62,11 @@ export class StartComponent implements OnInit {
   public systemInfo: SystemInfo;
   public viewReady: boolean;
   public userUid: string;
+  public departmentMembership: boolean;
+  public confParameterIsEnabled: boolean;
+  public banner: string;
+  public firstName: any;
+  public lastName: any;
 
   constructor(
     public readonly router: Router,
@@ -55,7 +75,9 @@ export class StartComponent implements OnInit {
     private readonly systemInfoService: SystemInfoService,
     private readonly sessionService: imx_SessionService,
     private readonly detectRef: ChangeDetectorRef,
-    private readonly projectConfigurationService: ProjectConfigurationService
+    private readonly projectConfigurationService: ProjectConfigurationService,
+    private readonly config: AppConfigService,
+    private snackBar: MatSnackBar
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -70,6 +92,8 @@ export class StartComponent implements OnInit {
       this.projectConfig = await this.projectConfigurationService.getConfig();
       this.systemInfo = await this.systemInfoService.get();
       this.userUid = (await this.sessionService.getSessionState()).UserUid;
+      this.FirstNameLastName()
+      this.PS2()
     } finally {
       busy.endBusy();
     }
@@ -97,6 +121,10 @@ export class StartComponent implements OnInit {
 
   public GoToProductSelection(): void {
     this.router.navigate(['newrequest']);
+  }
+
+  public GoToSupportPage(): void {
+    this.router.navigate(['support-page'])
   }
 
   public GoToItshopApprovals(): void {
@@ -160,5 +188,49 @@ export class StartComponent implements OnInit {
   public ShowNewRequestLink(): boolean {
     // Starting a new request is only allowed when the session has an identity and the ITShop(Requests) feature is enabled
     return this.userConfig?.IsITShopEnabled && this.userUid && this.systemInfo.PreProps.includes('ITSHOP');
+  }
+
+  public async FirstNameLastName(): Promise<void> {
+    let nameObject = await this.config.apiClient.processRequest<fullName>(this.GetFirstNameLastName());
+    this.firstName = nameObject.FirstName;
+    this.lastName = nameObject.LastName;
+  }
+
+  private GetFirstNameLastName(): MethodDescriptor<void> {
+    return {
+      path: `/portal/example/nameofloggedinuser`,
+      parameters: [],
+      method: 'GET',
+      headers: {
+        'imx-timezone': TimeZoneInfo.get(),
+      },
+      credentials: 'include',
+      observe: 'response',
+      responseType:'json',
+    };
+  }
+
+  public async PS2(): Promise<void> {
+    let bannerObject = await this.config.apiClient.processRequest<ps2>(this.GetPS2());
+    this.departmentMembership = bannerObject.DepartmentMembership;
+    this.confParameterIsEnabled = bannerObject.ConfParameterIsEnabled;
+    this.banner = bannerObject.BannerMessage;
+  }
+
+  private GetPS2(): MethodDescriptor<void> {
+    return {
+      path: `/portal/example/PS2`,
+      parameters: [],
+      method: 'GET',
+      headers: {
+        'imx-timezone': TimeZoneInfo.get(),
+      },
+      credentials: 'include',
+      observe: 'response',
+      responseType:'json',
+    };
+  }
+  showSnackBar() {
+    this.snackBar.open('alert closed', 'OK');
   }
 }

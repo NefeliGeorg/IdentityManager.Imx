@@ -171,12 +171,16 @@ imx-root > div > div > imx-login > div.imx-loginPage > div > div.imx-loginButton
     color: $CCC_orange !important;
 }
 
+.mat-form-field-infix:focus {
+    padding-bottom: 2px solid $CCC_orange !important;
+}
+
 //search icon & folder icon
 .eui-search-icon, .colored-icon {
     color: $CCC_orange !important;
 }
 
-.eui-top-navigation-desktop .eui-top-navigation .mat-button.eui-top-navigation-item-active {
+.eui-top-navigation-desktop .eui-top-navigation .mat-button.eui-top-navigation-item-active, .eui-top-navigation-desktop .eui-top-navigation .eui-top-navigation-item-active .mat-button, .eui-top-navigation-desktop .eui-top-navigation .mat-button.eui-top-navigation-item-active, .eui-top-navigation-desktop .eui-top-navigation .eui-top-navigation-item-active-link .mat-button, .eui-top-navigation-desktop .eui-top-navigation .mat-button.eui-top-navigation-item-active-link {
     border-bottom: 2px solid $CCC_orange !important;
 }
 
@@ -445,8 +449,8 @@ body .mat-button.mat-primary:hover {
     }
 }
 
-.eui-light-theme .expression-container:hover {
-    //background-color: $CCC_orange;
+body .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $CCC_orange !important;
 }
 
 body a {

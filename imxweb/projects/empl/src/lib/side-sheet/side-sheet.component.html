@@ -1,0 +1,21 @@
+<form #myForm="ngForm">
+    <mat-form-field appearance="outline">
+        <mat-label> Custom Property </mat-label>
+        <input type="string" matInput [(ngModel)]="request.CustomProperty" name="customProperty" required/>
+    </mat-form-field>
+  
+    <eui-date-picker name="ExitDate" required
+        [dateControl]="date"
+        placeholder="Select a Date"
+        label="Exit Date" [allowTextInput]="false"
+        [useClearIcon]="true">
+    </eui-date-picker>
+   
+    <div class="actions">
+        <button mat-button type="button" (click)="updateData()"> Update </button>
+    </div>
+    
+    <div *ngIf="isUpdating" class="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
+</form>

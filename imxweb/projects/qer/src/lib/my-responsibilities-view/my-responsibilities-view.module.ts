@@ -67,7 +67,7 @@ export class MyResponsibilitiesViewModule {
   }
 
   private setupMenu(): void {
-    this.menuService.addMenuFactories((preProps: string[], features: string[]) => ({
+    /*this.menuService.addMenuFactories((preProps: string[], features: string[]) => ({
       id: 'ROOT_Responsibilities',
       title: '#LDS#Responsibilities',
       sorting: '30',
@@ -79,6 +79,6 @@ export class MyResponsibilitiesViewModule {
           sorting: '30-20',
         },
       ],
-    }));
+    }));*/
   }
 }

@@ -1,4 +1,7 @@
-<h2 class="mat-headline">{{ '#LDS#Welcome' | translate }}</h2>
+<h2 class="mat-headline">{{ '#LDS#Welcome' | translate }}  {{ firstName }} {{ lastName }}</h2>
+
+<eui-alert *ngIf="departmentMembership && confParameterIsEnabled"
+type="warning" colored="true" dismissable="true" (dismissed)="showSnackBar()"> {{ banner }}</eui-alert>
 
 <imx-busy-indicator *ngIf="!viewReady"></imx-busy-indicator>
 
@@ -7,7 +10,7 @@
     <imx-badge-tile
       data-imx-identifier="start-tile-shopping-cart"
       [caption]="'#LDS#Heading Products in Shopping Cart' | translate"
-      *ngIf="userConfig?.IsITShopEnabled && GetCountProductsinShoppingCart() > 0"
+      *ngIf="userConfig?.IsITShopEnabled && GetCountProductsinShoppingCart() > -1"
       [value]="GetCountProductsinShoppingCart()"
       [identifier]="'shopping-cart'"
       (actionClick)="GoToShoppingCart()"
@@ -18,7 +21,7 @@
       data-imx-identifier="start-tile-it-shop-approvals"
       [caption]="'#LDS#Heading Pending Requests' | translate"
       [tooltip]="'#LDS#Shows the pending requests you can approve or deny.' | translate"
-      *ngIf="userConfig?.IsITShopEnabled && GetCountPendingRequests() > 0"
+      *ngIf="userConfig?.IsITShopEnabled && GetCountPendingRequests() > -1"
       [value]="GetCountPendingRequests()"
       [identifier]="'it-shop-approvals'"
       (actionClick)="GoToItshopApprovals()"
@@ -136,6 +139,22 @@
         </button>
       </ng-template>
     </imx-icon-tile>
+
+    <imx-icon-tile
+      data-imx-identifier="start-tile-start-a-new-request"
+      [caption]="'#LDS#Support Page' | translate"
+      [subtitle]="'#LDS#Visit the Support Page for assistance' | translate"
+      [image]="'help'"
+      [identifier]="'support-page'"
+    >
+      <ng-template #ActionTemplate>
+        <button mat-button color="primary" [attr.data-imx-identifier]="'imx-start-button-new-request'" (click)="GoToSupportPage()">
+          <span>{{ '#LDS#Review the Support Page' | translate }}</span>
+          <eui-icon size="m" icon="forward"></eui-icon>
+        </button>
+      </ng-template>
+    </imx-icon-tile>
+
     <imx-ext id="Dashboard-MediumTiles"></imx-ext>
   </div>
   <div class="imx-flexible-tile-row">

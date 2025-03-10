@@ -222,6 +222,6 @@ export class RunSidesheetComponent {
       ];
     }
 
-    this.pendingAttestations.loading = false;
+    this.pendingAttestations.loading = true;
   }
 }

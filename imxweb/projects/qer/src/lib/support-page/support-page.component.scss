@@ -1,0 +1,21 @@
+@import "variables.scss";
+
+h2 {
+    font-size: 26pt;
+    color: #333333;
+}
+
+a {
+    font-size: 16px;
+    color: #05AADB;
+}
+
+div.orange {
+    font-size: 18px;
+    color: $CCC_orange;
+}
+
+div.plain {
+    font-size: 16px;
+    color: #666666;
+}
